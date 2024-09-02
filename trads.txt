@@ -1,0 +1,7 @@
+
+"DCO change la gestion des données du tunnel VPN"
+"Le chiffrage/déchiffrage est déchargé vers le noyau plutôt que de gérer ça dans l'espace utilisateur"
+ 
+"Utilise le multi-threading et copie les opérations du noyau vers l'espace utilisateur."
+
+"OpenVPN DCO est un module chargeable optionellement installé et utilisé avec Access Server."

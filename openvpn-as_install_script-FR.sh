@@ -92,7 +92,7 @@ install_rpm() {
     if echo $RPM_CLONES |grep -q $ID ; then
         echo "ATTENTION : Cet OS Linux est un clone RHEL qui n'est pas supporté officiellement," >&2
         echo "cependant, en théorie, il est compatible avec le dépôt RHEL que nous prenons en charge" >&2
-        echo "Ce devrait être compatible mais il n'y a aucune garantie de que cela fonctionne comme attendu" >&2
+        echo "Ce devrait être compatible mais il n'y a aucune garantie que cela fonctionne comme attendu" >&2
     fi
 
     yum repolist || repo_error
@@ -139,31 +139,41 @@ install_rpm() {
 install_dco() {
     echo
     echo
-    echo "Access Server 2.12 and newer supports OpenVPN Data Channel Offload (DCO)."
-    echo "You can benefit from performance improvements when you enable DCO for your VPN server and clients."
+    echo "Les versions d'Access Server 2.12 et au-dessus supporte l'OpenVPN Data Channel Offload (DCO)."
+# TODO 
+# Ajouter un lien vers la page OpenVPN Data Channel Offload
+# https://openvpn.net/as-docs/openvpn-data-channel-offload.html##
+# Ajouter l'explication de DCO ?
+    echo "Avec DCO vous pouvez bénéficier d'améliorations des performances en activant DCO sur votre serveur VPN et les clients"
     echo
-    echo "Your running kernel version is '$(uname -r)'"
+    echo "DCO change la gestion des données du tunnel VPN"
+    echo "Le chiffrage/déchiffrage est déchargé vers le noyau plutôt que de gérer ça dans l'espace utilisateur"
+    echo "Utilise le multi-threading et copie les opérations du noyau vers l'espace utilisateur."
     echo
-    echo "DCO needs Linux kernel headers to be installed."
-    echo "If the Linux kernel headers are not present, they will be installed automatically."
+    echo "OpenVPN DCO est un module chargeable optionellement installé et utilisé avec Access Server."
     echo
-    read -p "Would you like to install OpenVPN Data Channel Offload? (y/N): " resp
+    echo "La version de votre noyau en fonction est : '$(uname -r)'"
+    echo
+    echo "DCO a besoin des headers du noyau pour être installé"
+    echo "Si ces headers ne sont pas présents, ils seront installés automatiquement"
+    echo
+    read -p "Voulez-vous installer OpenVPN Data Channel Offload? (oui/NON): " resp
 
-    if [[ "$resp" = 'Y' || "$resp" = 'y' ]]; then
+    if [[ "$resp" = 'OUI' || "$resp" = 'oui' ]]; then
         if check_install_headers "$1" ; then
             echo
-            echo "Linux kernel headers are installed. Proceeding with DCO installation."
+            echo "Les headers du noyau Linux sont installés. Passage à l'installation de DCO"
             echo
-            echo "Keep in mind that if newer kernel versions are available,"
-            echo "there is a possibility that DCO installation could fail."
+            echo "Souvenez-vous que si de nouvelles versions du noyau sont disponibles,"
+            echo "il est possible que l'installation de DCO échoue."
             return 0
         else
             echo
-            echo "WARNING: The actual kernel headers could not be located and installed." >&2
-            echo "For further guidance, please refer to our online documentation or contact our support team." >&2
+            echo "ATTENTION : Les headers du noyau actuel n'ont pu être ni localisés ni installés" >&2
+            echo "Veuillez consulter notre documentation en ligne ou contactez l'équipe de support pour plus d'assistance" >&2
             echo "https://openvpn.net/vpn-server-resources/openvpn-dco-access-server/" >&2
             echo
-            echo "DCO can not be installed. Skipped." >&2
+            echo "DCO ne peut pas être installé, ignoré" >&2
         fi
     fi
     return 101
