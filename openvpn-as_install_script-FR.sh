@@ -216,7 +216,7 @@ echo
 echo "Bienvenue sur l'installation d'OpenVPN Access Server !"
 echo
 echo
-echo "ttention : Veuillez avant vérifier qu'il n'y a aucune mise à jour de sécurité"
+echo "ATTENTION : Veuillez avant vérifier qu'il n'y a aucune mise à jour de sécurité"
 echo "ou du noyau pour votre système"
 echo "Il est recommandé de les installer avant de procéder à toute installation"
 echo
