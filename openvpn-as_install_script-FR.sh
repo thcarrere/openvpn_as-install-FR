@@ -138,18 +138,16 @@ install_rpm() {
 
 install_dco() {
     echo
-    echo
+   
     echo "Les versions d'Access Server 2.12 et au-dessus supporte l'OpenVPN Data Channel Offload (DCO)."
-# TODO 
-# Ajouter un lien vers la page OpenVPN Data Channel Offload
-# https://openvpn.net/as-docs/openvpn-data-channel-offload.html##
-# Ajouter l'explication de DCO ?
+    echo   
     echo "Avec DCO vous pouvez bénéficier d'améliorations des performances en activant DCO sur votre serveur VPN et les clients"
     echo
     echo "DCO change la gestion des données du tunnel VPN"
     echo "Le chiffrage/déchiffrage est déchargé vers le noyau plutôt que de gérer ça dans l'espace utilisateur"
     echo "Utilise le multi-threading et copie les opérations du noyau vers l'espace utilisateur."
     echo
+    echo "Explications DCO : https://openvpn.net/as-docs/openvpn-data-channel-offload.html##"
     echo "OpenVPN DCO est un module chargeable optionellement installé et utilisé avec Access Server."
     echo
     echo "La version de votre noyau en fonction est : '$(uname -r)'"
@@ -202,25 +200,25 @@ check_install_headers() {
 }
 
 confirmation_prompt() {
-    echo "If you're ready to install OpenVPN Access Server, you can continue below."
+    echo "Si vous êtes prêt à installer OpenVPN Access Server, continuez dessous"
     echo
-    echo "Detected Linux distribution: $PRETTY_NAME $ARCH"
-    read -p "Do you want to proceed with the installation? (y/N): " response
+    echo "Linux, distribution détectée : $PRETTY_NAME $ARCH"
+    read -p "Voulez-vous procéder à l'installation ? (oui/NON): " response
 
-    if [[ "$response" != "Y" && "$response" != "y" ]]; then
-        echo "Installation aborted." >&2
+    if [[ "$response" != "OUI" && "$response" != "oui" ]]; then
+        echo "Installation avortée." >&2
         exit 0
     fi
 }
 
 echo
 echo
-echo "Welcome to the OpenVPN Access Server Installation!"
+echo "Bienvenue sue l'installation d'OpenVPN Access Server !"
 echo
 echo
-echo "WARNING: Please verify if there are any available security"
-echo "and kernel updates for your operating system. We recommend"
-echo "installing and applying these updates before proceeding."
+echo "ttention : Veuillez avant vérifier qu'il n'y a aucune mise à jour de sécurité"
+echo "ou du noyau pour votre système"
+echo "Il est recommandé de les installer avant de procéder à toute installation"
 echo
 
 install_packages
