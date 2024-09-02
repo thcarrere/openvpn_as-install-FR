@@ -1,6 +1,6 @@
 #!/bin/bash
 # Script d'installation pour OpenVPN Access Server  
-# The script will automatically install OpenVPN Access Server based on your Linux distribution.
+# Le script installera automatiquement OpenVPN Access Server selon la distribution Linux utilisée
 #
 # Copyright 2024 OpenVPN Inc. All Rights Reserved.
 #
@@ -12,16 +12,16 @@ PLIST="openvpn-as"
 DCO_NAME="openvpn-dco-dkms"
 
 abort() {
-    echo "This $PRETTY_NAME $ARCH distribution is not officially supported. Aborted." >&2
+    echo "Cette $PRETTY_NAME $ARCH distribution n'est pas officiellement supportée. Installation avortée" >&2
     exit 1
 }
 
 repo_error() {
     echo
-    echo "Unfortunately the package management program on your operating system is reporting a problem." >&2
-    echo "Please refer to our online documentation or contact our support team for assistance." >&2
+    echo "Désolé, le gestionnaire de paquets de votre système rapporte un problème sans en préciser la source" >&2
+    echo "Veuillez consulter notre documentation en ligne ou contactez l'équipe de support pour une assistance." >&2
     echo
-    echo "The installation therefore had to be stopped." >&2
+    echo "L'installation doit être interrompue" >&2
     exit 4
 }
 
@@ -29,7 +29,7 @@ initialization() {
     if [ -f "/etc/os-release" ]; then
         . /etc/os-release
     else
-        echo "Can not detect OS/distribution. Aborted." >&2
+        echo "Impossible de détecter l'OS/distribution. Installation avortée" >&2
         exit 1
     fi
 
@@ -90,9 +90,9 @@ install_rpm() {
     RPM_CLONES="rocky almalinux ol"
 
     if echo $RPM_CLONES |grep -q $ID ; then
-        echo "WARNING: This Linux OS is a RHEL Clone and not officially supported," >&2
-        echo "however in theory, it's compatible with RHEL Repositories which we do support." >&2
-        echo "This should be compatible but there is no guarantee to function as expected." >&2
+        echo "ATTENTION : Cet OS Linux est un clone RHEL qui n'est pas supporté officiellement," >&2
+        echo "cependant, en théorie, il est compatible avec le dépôt RHEL que nous prenons en charge" >&2
+        echo "Ce devrait être compatible mais il n'y a aucune garantie de que cela fonctionne comme attendu" >&2
     fi
 
     yum repolist || repo_error
