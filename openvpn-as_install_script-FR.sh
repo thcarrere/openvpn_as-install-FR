@@ -213,7 +213,7 @@ confirmation_prompt() {
 
 echo
 echo
-echo "Bienvenue sue l'installation d'OpenVPN Access Server !"
+echo "Bienvenue sur l'installation d'OpenVPN Access Server !"
 echo
 echo
 echo "ttention : Veuillez avant vérifier qu'il n'y a aucune mise à jour de sécurité"
